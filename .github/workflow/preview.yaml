@@ -1,0 +1,23 @@
+name: Deploy website preview
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  deploy-preview:
+    name: Deployment preview
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.STAGE_VERCEL_TOKEN }} # Required
+          vercel-org-id: ${{ secrets.STAGE_VERCEL_ORG_ID }} #Required
+          vercel-project-id: ${{ secrets.STAGE_VERCEL_PROJECT_ID }} #Required
